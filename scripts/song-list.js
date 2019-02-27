@@ -1,24 +1,23 @@
 {
-  album.songs.forEach ( (song, index) => {
-    song.element = $(`
+  album.songs.forEach( (song, index) => {
+    song.element = $( `
       <tr>
-      <td>
+        <td>
           <button>
             <span class="song-number">${index + 1}</span>
             <span class="ion-play"></span>
             <span class="ion-pause"></span>
           </button>
         </td>
-       <td>${song.title}</td>
-       <td>${song.duration}</td>
-        </tr>
-        `);
+        <td>${song.title}</td>
+        <td>${song.duration}</td>
+      </tr>
+      `);
+      song.element.on('click', event => {
+        helper.playPauseAndUpdate(song);
+        $('button#play-pause').attr('playState', player.playState);
+      })
 
-    song.element.on(`click`, event => {
-      player.playPause(song);
-      $('button#play-pause').attr('playState', player.playSTate);
-    });
-
-        $('#song-list').append(song.element);
+      $('#song-list').append(song.element);
   });
 }
